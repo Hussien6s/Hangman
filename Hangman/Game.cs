@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hangman
 {
-    internal class Game
+    internal class Game: IUser
     {
         protected char[] hiddenword = new char[60];
         protected char[] EnteredLetter = new char[26];
@@ -14,16 +14,16 @@ namespace Hangman
         Player p = new Player();
         
 
-        public int diff() //bna5od mostawa el so3oba mn el user
+        public char AskUser() //bna5od mostawa el so3oba mn el user
         {
-            int x;
+            char x;
             Console.WriteLine("Choose Diffculty\n----------------\n1-Easy\n2-Medium\n3-Hard");
-            x = int.Parse(Console.ReadLine());
+            x = Console.ReadLine()[0];
 
-            while (x < 1 || x > 3) 
+            while (x < '1' || x > '3') 
             {
                 Console.Write("Enter choice (1-3): ");
-                x = int.Parse(Console.ReadLine());
+                x = Console.ReadLine()[0];
             }
             
             return x;
@@ -31,7 +31,7 @@ namespace Hangman
             
         public void SetHidden() //bnst3ml el words classes 3lshan na5od el kelma el sereya mn el user
         {
-            int ch = diff();
+            int ch = AskUser()-'0';
             if (ch == 1)
             {
                 EasyWord word = new EasyWord();
