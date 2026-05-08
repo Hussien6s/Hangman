@@ -13,12 +13,7 @@ namespace Hangman
                 g1.StartGame();
                 Console.WriteLine("\nDo you want to play again? (y/n)");
                 playagain = char.ToLower(Console.ReadLine()[0]);
-            } while (playagain == 'y');
-
-            
-            
-
-
+            } while (playagain == 'y'); // feh moshkela fel playagain msh by3ml 7aga
         }
     }
 }

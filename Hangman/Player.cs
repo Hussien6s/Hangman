@@ -46,11 +46,11 @@ namespace Hangman
         public char AskUser() //bna5od mn el user el 7arf
         {
             Console.WriteLine("Enter a letter");
-            char x = char.ToLower(Console.ReadLine()[0]);
+            char x= char.ToLower(Console.ReadLine()[0]); 
             if (x>='a'&&x<='z')
                 return x;
             else
-                throw new InvalidInputException("The character '" + x + "' is not a valid letter.");
+            throw new InvalidInputException("The character '" + x + "' is not a valid letter.");
         }
         public void AddScore(int x) 
         {

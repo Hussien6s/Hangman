@@ -101,6 +101,8 @@ namespace Hangman
 
         public void StartGame() 
         {
+            p.Guesses = 6;
+            EnteredLetter = new char[26];
             SetHidden();
             char y;
             int count = 0;
@@ -109,6 +111,7 @@ namespace Hangman
             {
                 
                 Console.WriteLine($"Avaliable Guesses: {p.Guesses} \n");
+                Drawer();
                 Console.Write("Entered letters: ");
                 for(int i = 0; i < EnteredLetter.Length; i++)
                 {
@@ -142,6 +145,8 @@ namespace Hangman
                     Console.WriteLine("\nWrong Letter");
                 }
             }
+            if(!Finished())
+                Drawer();
             GameFinished();
         }
 
@@ -157,6 +162,53 @@ namespace Hangman
             {
                 Console.WriteLine($"You Lost. \nThe Word is: {target}");
             }
+        }
+
+        public void Drawer()
+        {
+            Console.WriteLine("\t\t\t\t\t  +---+");
+            Console.WriteLine("\t\t\t\t\t  |   |");
+
+            switch (p.Guesses)
+            {
+                case 5:
+                    Console.WriteLine("\t\t\t\t\t  O   |");
+                    Console.WriteLine("\t\t\t\t\t      |");
+                    Console.WriteLine("\t\t\t\t\t      |");
+                    break;
+                case 4:
+                    Console.WriteLine("\t\t\t\t\t  O   |");
+                    Console.WriteLine("\t\t\t\t\t  |   |");
+                    Console.WriteLine("\t\t\t\t\t      |");
+                    break;
+                case 3:
+                    Console.WriteLine("\t\t\t\t\t  O   |");
+                    Console.WriteLine("\t\t\t\t\t /|   |");
+                    Console.WriteLine("\t\t\t\t\t      |");
+                    break;
+                case 2:
+                    Console.WriteLine("\t\t\t\t\t  O   |");
+                    Console.WriteLine("\t\t\t\t\t /|\\  |");
+                    Console.WriteLine("\t\t\t\t\t      |");
+                    break;
+                case 1:
+                    Console.WriteLine("\t\t\t\t\t  O   |");
+                    Console.WriteLine("\t\t\t\t\t /|\\  |");
+                    Console.WriteLine("\t\t\t\t\t /    |");
+                    break;
+                case 0:
+                    Console.WriteLine("\t\t\t\t\t  O   |");
+                    Console.WriteLine("\t\t\t\t\t /|\\  |");
+                    Console.WriteLine("\t\t\t\t\t / \\  |");
+                    break;
+                default:
+                    // For 6 guesses (full health) or more
+                    Console.WriteLine("\t\t\t\t\t      |");
+                    Console.WriteLine("\t\t\t\t\t      |");
+                    Console.WriteLine("\t\t\t\t\t      |");
+                    break;
+            }
+
         }
     } 
 }
