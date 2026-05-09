@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hangman
 {
-    public class InvalidInputException : Exception  //3yzeen nzbot el exception deh
-    {
-        public InvalidInputException(string message) : base(message) { }
-    }
+    
     internal class Player: IUser
     {
         int score;
@@ -45,12 +42,33 @@ namespace Hangman
         }
         public char AskUser() //bna5od mn el user el 7arf
         {
-            Console.WriteLine("Enter a letter");
-            char x= char.ToLower(Console.ReadLine()[0]); 
-            if (x>='a'&&x<='z')
-                return x;
-            else
-            throw new InvalidInputException("The character '" + x + "' is not a valid letter.");
+            while (true)
+            {
+                
+                try
+                {
+                    Console.WriteLine("Enter a letter:");
+                    string input = Console.ReadLine();
+
+                    if (string.IsNullOrEmpty(input))
+                        throw new InvalidInputException("Input cannot be empty.");
+
+                    char x = char.ToLower(input[0]);
+                    if (x >= 'a' && x <= 'z')
+                    {
+                        return x; // Success! Exit the method
+                    }
+                    else
+                    {
+                        // This triggers the catch block below
+                        throw new InvalidInputException("That is not a letter.");
+                    }
+                }
+                catch (InvalidInputException e)
+                {
+                    Console.WriteLine($"Error: {e.Message} Please try again.");
+                }
+            }
         }
         public void AddScore(int x) 
         {
