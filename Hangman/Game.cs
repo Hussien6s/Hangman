@@ -8,9 +8,9 @@ namespace Hangman
 {
     internal class Game : IUser
     {
-        protected char[] hiddenword = new char[60];
-        protected char[] EnteredLetter = new char[26];
-        protected string target = null;
+        private char[] hiddenword;
+        private char[] EnteredLetter = new char[26];
+        private string target = null;
         Player p = new Player();
 
 
@@ -83,7 +83,7 @@ namespace Hangman
             Console.WriteLine($"The User score {p.Score}");
             while (p.Guesses >= 1 && !Finished())
             {
-
+                Console.Clear();
                 Console.WriteLine($"Avaliable Guesses: {p.Guesses} \n");
                 Drawer();
                 Console.Write("Entered letters: ");
