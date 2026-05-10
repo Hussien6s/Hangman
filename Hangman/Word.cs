@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +8,7 @@ namespace Hangman
 {
     internal abstract class Word
     {
-        protected string secret_Word=null;
+        protected string secret_Word = null;
         public abstract string RandomWord();
     }
 }

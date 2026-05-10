@@ -1,21 +1,31 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Hangman
 {
     internal class MediumWord:Word
     {
-        List<string> Words;
+        static List<string> Words = null;
         public MediumWord()
         {
-            Words = new List<string> { "Hello World", "University of Canada", "Welcome Engineer", "World of Legends", "once upon a time" };
+            if (Words == null || Words.Count == 0)
+            {
+                try {
+                    Words = new List<string>(File.ReadAllLines("MediumWords.txt"));
+                } catch {
+                    Words = new List<string> { "Hello World", "University of Canada", "Welcome Engineer", "World of Legends", "once upon a time" };
+                }
+            }
         }
         public override string RandomWord()
         {
-            secret_Word = Words[Random.Shared.Next(Words.Count)];
+            int index = Random.Shared.Next(Words.Count);
+            secret_Word = Words[index];
+            Words.RemoveAt(index);
             return secret_Word;
         }
     }
