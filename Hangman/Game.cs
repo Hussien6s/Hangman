@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,81 +6,55 @@ using System.Threading.Tasks;
 
 namespace Hangman
 {
-    internal class Game: IUser
+    internal class Game : IUser
     {
         protected char[] hiddenword = new char[60];
         protected char[] EnteredLetter = new char[26];
         protected string target = null;
         Player p = new Player();
-        
+
 
         public char AskUser() //bna5od mostawa el so3oba mn el user
         {
             char x;
             Console.WriteLine("Choose Diffculty\n----------------\n1-Easy\n2-Medium\n3-Hard");
-            x = Console.ReadLine()[0];
+            string input = Console.ReadLine();
+            x = string.IsNullOrEmpty(input) ? ' ' : input[0];
 
-            while (x < '1' || x > '3') 
+            while (x < '1' || x > '3')
             {
                 Console.Write("Enter choice (1-3): ");
-                x = Console.ReadLine()[0];
+                input = Console.ReadLine();
+                x = string.IsNullOrEmpty(input) ? ' ' : input[0];
             }
-            
+
             return x;
         }
-            
+
         public void SetHidden() //bnst3ml el words classes 3lshan na5od el kelma el sereya mn el user
         {
-            int ch = AskUser()-'0';
-            if (ch == 1)
+            int ch = AskUser() - '0';
+            Word word = null;
+
+            if (ch == 1) word = new EasyWord();
+            else if (ch == 2) word = new MediumWord();
+            else if (ch == 3) word = new HardWord();
+
+            target = word.RandomWord();
+            hiddenword = new char[target.Length];
+
+            for (int i = 0; i < target.Length; i++)
             {
-                EasyWord word = new EasyWord();
-                target = word.RandomWord();
-                hiddenword = new char[target.Length];
-                for (int i = 0; i < target.Length; i++)
-                {
-                    if (char.IsLetter(target[i]))
-                        hiddenword[i] = '_';
-
-                    else if (target[i] == ' ')
-                        hiddenword[i] = ' ';
-                }
+                if (char.IsLetter(target[i]))
+                    hiddenword[i] = '_';
+                else
+                    hiddenword[i] = target[i];
             }
-
-            else if (ch == 2)
-            {
-                MediumWord word = new MediumWord();
-                target = word.RandomWord();
-                hiddenword = new char[target.Length];
-                for (int i = 0; i < target.Length; i++)
-                {
-                    if (char.IsLetter(target[i]))
-                        hiddenword[i] = '_';
-
-                    else if (target[i] == ' ')
-                        hiddenword[i] = ' ';
-                }
-            }
-            else if (ch == 3)
-            {
-                HardWord word = new HardWord();
-                target = word.RandomWord();
-                hiddenword = new char[target.Length];
-                for (int i = 0; i < target.Length; i++)
-                {
-                    if (char.IsLetter(target[i]))
-                        hiddenword[i] = '_';
-
-                    else if (target[i] == ' ')
-                        hiddenword[i] = ' ';
-                }         
-            }
-            
         }
 
         public bool IsEntered(char x) //bnt2aked lw el 7arf da5al abl kda
         {
-            for(int i = 0; i < EnteredLetter.Length; i++)
+            for (int i = 0; i < EnteredLetter.Length; i++)
             {
                 if (x == EnteredLetter[i])
                     return true;
@@ -90,8 +64,8 @@ namespace Hangman
 
         public bool Finished() //bnshof el user gab el kelma kolaha s7 wla lesa
         {
-            
-            for(int i=0;i<target.Length;i++)
+
+            for (int i = 0; i < target.Length; i++)
             {
                 if (hiddenword[i] != char.ToLower(target[i]))
                     return false;
@@ -99,7 +73,7 @@ namespace Hangman
             return true;
         }
 
-        public void StartGame() 
+        public void StartGame()
         {
             p.Guesses = 6;
             EnteredLetter = new char[26];
@@ -109,18 +83,18 @@ namespace Hangman
             Console.WriteLine($"The User score {p.Score}");
             while (p.Guesses >= 1 && !Finished())
             {
-                
+
                 Console.WriteLine($"Avaliable Guesses: {p.Guesses} \n");
                 Drawer();
                 Console.Write("Entered letters: ");
-                for(int i = 0; i < EnteredLetter.Length; i++)
+                for (int i = 0; i < EnteredLetter.Length; i++)
                 {
                     if (char.IsLetter(EnteredLetter[i]))
-                        Console.Write(EnteredLetter[i]+" ");
+                        Console.Write(EnteredLetter[i] + " ");
                 }
                 Console.WriteLine();
                 Console.WriteLine(hiddenword);
-                
+
 
                 y = p.AskUser();
                 while (IsEntered(y))
@@ -137,7 +111,7 @@ namespace Hangman
                         hiddenword[i] = y;
                         found = true;
                     }
-                        
+
                 }
                 if (!found)
                 {
@@ -145,12 +119,12 @@ namespace Hangman
                     Console.WriteLine("\nWrong Letter");
                 }
             }
-            if(!Finished())
+            if (!Finished())
                 Drawer();
             GameFinished();
         }
 
-       
+
         public void GameFinished() // bnshof lw el game 5eles
         {
             if (Finished())
@@ -210,8 +184,8 @@ namespace Hangman
             }
 
         }
-    } 
+    }
 }
 
-    
+
 

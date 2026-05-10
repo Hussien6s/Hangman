@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Hangman
 {
-    
-    internal class Player: IUser
+
+    internal class Player : IUser
     {
         int score;
         int guesses;
@@ -27,11 +27,12 @@ namespace Hangman
             }
             else
             {
-              //  throw new NoGuessesRemainingException("No more guesses remaining! Game Over.");
+                //  throw new NoGuessesRemainingException("No more guesses remaining! Game Over.");
                 return false;
             }
         }
-        public int Score {
+        public int Score
+        {
             get { return score; }
             set { score = value; }
         }
@@ -44,7 +45,7 @@ namespace Hangman
         {
             while (true)
             {
-                
+
                 try
                 {
                     Console.WriteLine("Enter a letter:");
@@ -52,6 +53,9 @@ namespace Hangman
 
                     if (string.IsNullOrEmpty(input))
                         throw new InvalidInputException("Input cannot be empty.");
+
+                    if (input.Length > 1)
+                        throw new InvalidInputException("Please enter exactly one letter.");
 
                     char x = char.ToLower(input[0]);
                     if (x >= 'a' && x <= 'z')
@@ -70,7 +74,7 @@ namespace Hangman
                 }
             }
         }
-        public void AddScore(int x) 
+        public void AddScore(int x)
         {
             score += x;
         }
