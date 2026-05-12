@@ -21,7 +21,7 @@ namespace Hangman
                 {
                     playagain = char.ToLower(input[0]);
                 }
-            } while (playagain == 'y'); // feh moshkela fel playagain msh by3ml 7aga
+            } while (playagain == 'y'); 
         }
     }
 }

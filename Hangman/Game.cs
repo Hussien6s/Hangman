@@ -9,12 +9,28 @@ namespace Hangman
     internal class Game : IUser
     {
         private char[] hiddenword;
-        private char[] EnteredLetter = new char[26];
+        private char[] enteredLetter;
         private string target = null;
         Player p = new Player();
 
+        public char[] Hiddenword
+        {
+            set { hiddenword = value; }
+            get { return hiddenword; }
+        }
 
-        public char AskUser() //bna5od mostawa el so3oba mn el user
+        public char[] EnteredLetter
+        {
+            set { enteredLetter = value; }
+            get { return enteredLetter; }
+        }
+        public string Target
+        {
+            set { target = value; }
+            get { return target; }
+        }
+
+        public char AskUser() 
         {
             char x;
             Console.WriteLine("Choose Diffculty\n----------------\n1-Easy\n2-Medium\n3-Hard");
@@ -31,7 +47,7 @@ namespace Hangman
             return x;
         }
 
-        public void SetHidden() //bnst3ml el words classes 3lshan na5od el kelma el sereya mn el user
+        public void SetHidden() 
         {
             int ch = AskUser() - '0';
             Word word = null;
@@ -52,7 +68,7 @@ namespace Hangman
             }
         }
 
-        public bool IsEntered(char x) //bnt2aked lw el 7arf da5al abl kda
+        public bool IsEntered(char x) 
         {
             for (int i = 0; i < EnteredLetter.Length; i++)
             {
@@ -62,7 +78,7 @@ namespace Hangman
             return false;
         }
 
-        public bool Finished() //bnshof el user gab el kelma kolaha s7 wla lesa
+        public bool Finished() 
         {
 
             for (int i = 0; i < target.Length; i++)
@@ -125,7 +141,7 @@ namespace Hangman
         }
 
 
-        public void GameFinished() // bnshof lw el game 5eles
+        public void GameFinished() 
         {
             if (Finished())
             {
@@ -176,7 +192,6 @@ namespace Hangman
                     Console.WriteLine("\t\t\t\t\t / \\  |");
                     break;
                 default:
-                    // For 6 guesses (full health) or more
                     Console.WriteLine("\t\t\t\t\t      |");
                     Console.WriteLine("\t\t\t\t\t      |");
                     Console.WriteLine("\t\t\t\t\t      |");

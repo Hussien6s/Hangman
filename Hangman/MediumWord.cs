@@ -24,9 +24,9 @@ namespace Hangman
         public override string RandomWord()
         {
             int index = Random.Shared.Next(Words.Count);
-            secret_Word = Words[index];
+            Secret_Word = Words[index];
             Words.RemoveAt(index);
-            return secret_Word;
+            return Secret_Word;
         }
     }
 }

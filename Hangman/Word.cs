@@ -8,7 +8,13 @@ namespace Hangman
 {
     internal abstract class Word
     {
-        protected string secret_Word = null;
+        private string secret_Word = null;
+
+        public string Secret_Word
+        {
+            set { secret_Word = value; }
+            get { return secret_Word; }
+        }
         public abstract string RandomWord();
     }
 }

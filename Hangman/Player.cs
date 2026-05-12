@@ -12,13 +12,13 @@ namespace Hangman
         int score;
         int guesses;
 
-        public Player()
+        public Player() 
         {
             this.score = 0;
             this.guesses = 6;
         }
 
-        public bool WrongLetter() //lw el 7arf 8alat bn2alel el guess
+        public bool WrongLetter() 
         {
             if (guesses >= 1)
             {
@@ -26,8 +26,7 @@ namespace Hangman
                 return true;
             }
             else
-            {
-                //  throw new NoGuessesRemainingException("No more guesses remaining! Game Over.");
+            { 
                 return false;
             }
         }
@@ -41,7 +40,7 @@ namespace Hangman
             get { return guesses; }
             set { guesses = value; }
         }
-        public char AskUser() //bna5od mn el user el 7arf
+        public char AskUser() 
         {
             while (true)
             {
@@ -60,11 +59,11 @@ namespace Hangman
                     char x = char.ToLower(input[0]);
                     if (x >= 'a' && x <= 'z')
                     {
-                        return x; // Success! Exit the method
+                        return x; 
                     }
                     else
                     {
-                        // This triggers the catch block below
+                        
                         throw new InvalidInputException("That is not a letter.");
                     }
                 }
