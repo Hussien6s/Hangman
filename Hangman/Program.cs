@@ -21,7 +21,7 @@ namespace Hangman
                         playagain = char.ToLower(input[0]);
                         if (playagain == 'y' || playagain == 'n')
                         {
-                            break; // Exit the prompt loop if valid input
+                            break; 
                         }
                     }
                     Console.WriteLine("Invalid input. Please enter 'y' or 'n'.");
