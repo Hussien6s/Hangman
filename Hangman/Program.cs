@@ -11,15 +11,20 @@ namespace Hangman
             do
             {
                 g1.StartGame();
-                Console.WriteLine("\nDo you want to play again? (y/n)");
-                string input = Console.ReadLine();
-                if (string.IsNullOrEmpty(input))
+                while (true)
                 {
-                    playagain = 'n';
-                }
-                else
-                {
-                    playagain = char.ToLower(input[0]);
+                    Console.WriteLine("\nDo you want to play again? (y/n)");
+                    string input = Console.ReadLine();
+                    
+                    if (!string.IsNullOrEmpty(input))
+                    {
+                        playagain = char.ToLower(input[0]);
+                        if (playagain == 'y' || playagain == 'n')
+                        {
+                            break; // Exit the prompt loop if valid input
+                        }
+                    }
+                    Console.WriteLine("Invalid input. Please enter 'y' or 'n'.");
                 }
             } while (playagain == 'y'); 
         }
